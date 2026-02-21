@@ -107,7 +107,7 @@ const LinkCard = memo(({ link, index }: { link: LinkItem; index: number }) => (
     className={`link-card animate-fade-in-up relative flex items-center gap-4 rounded-2xl px-5 py-4 ${
       link.color
         ? `${link.color} text-white shadow-lg`
-        : 'border border-white/60 bg-white/70 text-slate-700 shadow-md shadow-pink-100/60 backdrop-blur-md hover:border-pink-200 hover:bg-white/90'
+        : 'border border-white/80 bg-white text-slate-700 shadow-sm shadow-pink-100/40 hover:border-pink-200 hover:bg-white hover:shadow-md hover:shadow-pink-100/50'
     }`}
     style={{ animationDelay: `${index * 80}ms` }}
   >
@@ -161,16 +161,15 @@ const HomePage: React.FC = () => {
       style={{ background: 'linear-gradient(135deg, #fdf2f8 0%, #faf5ff 40%, #fff7ed 100%)' }}
     >
       {/* Background blobs */}
-      <div className="blob absolute top-[-15%] left-[-8%] h-[55%] w-[55%] rounded-full bg-pink-300/25 blur-[100px]" />
-      <div className="blob absolute right-[-8%] bottom-[-15%] h-[50%] w-[45%] rounded-full bg-violet-300/20 blur-[100px]" />
-      <div className="blob absolute top-[35%] left-[55%] h-[30%] w-[30%] rounded-full bg-orange-200/30 blur-[80px]" />
+      <div className="blob absolute top-[-15%] left-[-8%] h-[55%] w-[55%] rounded-full bg-pink-300/20 blur-3xl" />
+      <div className="blob absolute right-[-8%] bottom-[-15%] h-[50%] w-[45%] rounded-full bg-violet-300/15 blur-3xl" />
 
       <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-sm flex-col items-center px-5 py-10 supports-[min-height:100dvh]:min-h-dvh sm:max-w-md sm:px-6 sm:py-14">
         {/* Profile Section */}
         <div className="animate-fade-in-down mb-10 flex flex-col items-center text-center">
           {/* Avatar */}
           <div
-            className="animate-scale-in avatar-ring mb-5 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-white/80 shadow-xl ring-4 shadow-pink-300/30 ring-white/80 backdrop-blur-sm"
+            className="animate-scale-in avatar-ring mb-5 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-white shadow-xl ring-4 shadow-pink-300/30 ring-white"
             style={{ animationDelay: '0ms' }}
           >
             <img
@@ -201,7 +200,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Description */}
-          <p className="max-w-[280px] text-sm leading-relaxed text-slate-500">
+          <p className="max-w-70 text-sm leading-relaxed text-slate-500">
             รับทำเว็บไซต์เซอร์ไพรส์แฟน <br />
             วันครบรอบ 💐 · วันเกิด · วันสำคัญ ✨ <br />
             Portfolio · Custom Web 💌

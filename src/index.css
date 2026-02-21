@@ -53,20 +53,19 @@
   }
 }
 
-/* Promote animated elements to their own compositor layer */
+/* Promote only actively-animating elements to compositor layer.
+   will-change is removed after animation via animation-fill-mode:both */
 .animate-fade-in-down,
 .animate-fade-in-up,
 .animate-scale-in {
   will-change: opacity, transform;
-  backface-visibility: hidden;
 }
 
-/* Contain blob repaints so they don't affect the rest of the page */
+/* Isolate blobs to their own paint layer without triggering reflow */
 .blob {
-  contain: layout style;
-  will-change: auto;
-  backface-visibility: hidden;
+  isolation: isolate;
   transform: translateZ(0);
+  pointer-events: none;
 }
 
 /* Link card hover — separate from entrance animation to avoid conflict */
