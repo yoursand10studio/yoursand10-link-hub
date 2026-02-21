@@ -14,11 +14,12 @@ export default defineConfig({
   build: {
     target: 'es2020',
     cssCodeSplit: true,
-    // Inline small assets (< 20KB) to completely eliminate HTTP requests for the logo (16KB)
-    assetsInlineLimit: 20000,
     // Enable minification
     minify: 'esbuild',
     // CSS minification
     cssMinify: true,
+  },
+  esbuild: {
+    drop: ['console', 'debugger'],
   },
 });

@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import logoImage from '../../assets/image/Logo.webp';
 
 interface LinkItem {
   id: string;
@@ -193,7 +192,7 @@ const HomePage: React.FC = () => {
             style={{ animationDelay: '0ms' }}
           >
             <img
-              src={logoImage}
+              src="/Logo.webp"
               alt="Yours & 10 Logo"
               width={112}
               height={112}
