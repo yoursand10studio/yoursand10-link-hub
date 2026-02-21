@@ -37,29 +37,14 @@
     />
     <meta property="twitter:image" content="https://yoursand10.com/og-image.jpg" />
 
-    <!-- Preconnect for fonts (high priority) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- DNS prefetch for social links -->
-    <link rel="dns-prefetch" href="https://www.tiktok.com" />
-    <link rel="dns-prefetch" href="https://www.instagram.com" />
-    <link rel="dns-prefetch" href="https://x.com" />
-    <link rel="dns-prefetch" href="https://line.me" />
-
-    <!-- Load fonts asynchronously to avoid render blocking -->
+    <!-- Preload self-hosted font for fast rendering -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
+      rel="preload"
+      href="/fonts/Outfit-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
   </head>
   <body class="font-outfit antialiased">
     <div id="root"></div>
