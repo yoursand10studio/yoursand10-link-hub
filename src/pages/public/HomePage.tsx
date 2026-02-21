@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
+import logoImage from '../../assets/image/Logo.webp';
 
 interface LinkItem {
   id: string;
@@ -98,95 +99,129 @@ const links: LinkItem[] = [
   },
 ];
 
-import logoImage from '../../assets/image/Logo.webp';
+const LinkCard = memo(({ link, index }: { link: LinkItem; index: number }) => (
+  <a
+    href={link.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`link-card animate-fade-in-up relative flex items-center gap-4 rounded-2xl px-5 py-4 ${
+      link.color
+        ? `${link.color} text-white shadow-lg`
+        : 'border border-white/60 bg-white/70 text-slate-700 shadow-md shadow-pink-100/60 backdrop-blur-md hover:border-pink-200 hover:bg-white/90'
+    }`}
+    style={{ animationDelay: `${index * 80}ms` }}
+  >
+    {/* Icon */}
+    <div
+      className={`link-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
+        link.color ? 'bg-white/15' : 'bg-pink-50'
+      }`}
+    >
+      <span className={link.color ? 'text-white' : 'text-pink-500'}>{link.icon}</span>
+    </div>
+
+    {/* Text */}
+    <div className="flex min-w-0 flex-1 flex-col">
+      <span
+        className={`truncate text-sm font-semibold tracking-wide ${link.color ? 'text-white' : 'text-slate-800'}`}
+      >
+        {link.title}
+      </span>
+      {link.username && (
+        <span
+          className={`truncate text-xs font-normal ${link.color ? 'text-white/70' : 'text-slate-400'}`}
+        >
+          {link.username}
+        </span>
+      )}
+    </div>
+
+    {/* Arrow */}
+    <div className="link-arrow shrink-0">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-4 w-4"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2.5}
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  </a>
+));
+
+LinkCard.displayName = 'LinkCard';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="font-outfit relative min-h-screen overflow-hidden bg-linear-to-br from-rose-100 via-purple-50 to-orange-50 text-slate-800">
-      {/* Background Effects */}
-      {/* GPU-optimized background blobs with reduced blur for mobile performance */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-pink-400/20 rounded-full blur-3xl md:blur-[80px] mix-blend-multiply will-change-transform" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[50%] bg-purple-400/20 rounded-full blur-3xl md:blur-[80px] mix-blend-multiply will-change-transform" />
+    <div
+      className="font-outfit relative min-h-screen overflow-hidden text-slate-800"
+      style={{ background: 'linear-gradient(135deg, #fdf2f8 0%, #faf5ff 40%, #fff7ed 100%)' }}
+    >
+      {/* Background blobs */}
+      <div className="blob absolute top-[-15%] left-[-8%] h-[55%] w-[55%] rounded-full bg-pink-300/25 blur-[100px]" />
+      <div className="blob absolute right-[-8%] bottom-[-15%] h-[50%] w-[45%] rounded-full bg-violet-300/20 blur-[100px]" />
+      <div className="blob absolute top-[35%] left-[55%] h-[30%] w-[30%] rounded-full bg-orange-200/30 blur-[80px]" />
 
-      <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-md flex-col items-center px-4 py-8 supports-[min-height:100dvh]:min-h-dvh sm:px-6 sm:py-12">
+      <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-sm flex-col items-center px-5 py-10 supports-[min-height:100dvh]:min-h-dvh sm:max-w-md sm:px-6 sm:py-14">
         {/* Profile Section */}
-        <div className="animate-fade-in-down mb-8 text-center">
-          <div className="relative mx-auto mb-4 flex h-40 w-40 items-center justify-center overflow-hidden rounded-full bg-transparent shadow-xl shadow-pink-500/20">
-            <img src={logoImage} alt="Yours & 10 Logo" className="h-full w-full object-contain" />
+        <div className="animate-fade-in-down mb-10 flex flex-col items-center text-center">
+          {/* Avatar */}
+          <div
+            className="animate-scale-in avatar-ring mb-5 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-white/80 shadow-xl ring-4 shadow-pink-300/30 ring-white/80 backdrop-blur-sm"
+            style={{ animationDelay: '0ms' }}
+          >
+            <img
+              src={logoImage}
+              alt="Yours & 10 Logo"
+              className="h-full w-full object-contain"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
+            />
           </div>
 
-          <h1 className="mb-1 text-2xl font-bold tracking-wide text-slate-900">
-            Yours & 10 | Studio
+          {/* Name */}
+          <h1 className="mb-1 text-2xl font-bold tracking-tight text-slate-900">
+            Yours & 10 <span className="text-pink-500">Studio</span>
           </h1>
-          <p className="mb-4 text-sm font-medium text-pink-600 italic">
+
+          {/* Tagline */}
+          <p className="mb-4 text-xs font-medium tracking-[0.18em] text-pink-400 uppercase">
             Crafting memories into websites
           </p>
-          <p className="mx-auto max-w-[320px] text-sm leading-relaxed font-light text-slate-600">
+
+          {/* Divider */}
+          <div className="mb-4 flex items-center gap-3">
+            <div className="h-px w-12 bg-linear-to-r from-transparent to-pink-200" />
+            <span className="text-lg">✨</span>
+            <div className="h-px w-12 bg-linear-to-l from-transparent to-pink-200" />
+          </div>
+
+          {/* Description */}
+          <p className="max-w-[280px] text-sm leading-relaxed text-slate-500">
             รับทำเว็บไซต์เซอร์ไพรส์แฟน <br />
-            วันครบรอบ 💐 | วันเกิด | วันสำคัญ ✨ <br />
-            รวมถึง Portfolio | Custom Web 💌
+            วันครบรอบ 💐 · วันเกิด · วันสำคัญ ✨ <br />
+            Portfolio · Custom Web 💌
           </p>
         </div>
 
         {/* Links Section */}
-        <div className="w-full flex-1 space-y-4">
+        <div className="w-full flex-1 space-y-3">
           {links.map((link, index) => (
-            <a
-              key={link.id}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`
-                group relative flex items-center p-4 rounded-xl 
-                transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-pink-500/10
-                ${link.color ? `${link.color} text-white` : 'bg-white/95 hover:bg-white text-slate-700 border border-white/80 hover:border-pink-300 shadow-sm'}
-              `}
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div
-                className={`mr-4 transition-colors ${link.color ? 'text-white/90 group-hover:text-white' : 'text-pink-500'}`}
-              >
-                {link.icon}
-              </div>
-              <div className="flex min-w-0 flex-1 flex-col">
-                <span
-                  className={`truncate font-medium ${link.color ? 'text-white/95' : 'text-slate-800'}`}
-                >
-                  {link.title}
-                </span>
-                {link.username && (
-                  <span
-                    className={`truncate text-xs font-light ${link.color ? 'text-white/70 group-hover:text-white/90' : 'text-slate-500'}`}
-                  >
-                    {link.username}
-                  </span>
-                )}
-              </div>
-              <div
-                className={`absolute right-4 opacity-0 transition-opacity group-hover:opacity-100 ${link.color ? 'text-white' : 'text-slate-400'}`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </div>
-            </a>
+            <LinkCard key={link.id} link={link} index={index} />
           ))}
         </div>
 
         {/* Footer */}
-        <footer className="mt-12 text-center text-xs text-slate-400">
-          <p>© {new Date().getFullYear()} Yours & 10 Studio. All rights reserved.</p>
+        <footer className="mt-12 flex flex-col items-center gap-1 text-center">
+          <div className="h-px w-16 bg-linear-to-r from-transparent via-pink-200 to-transparent" />
+          <p className="mt-3 text-xs text-slate-400">
+            © {new Date().getFullYear()} Yours & 10 Studio
+          </p>
+          <p className="text-xs text-slate-300">All rights reserved.</p>
         </footer>
       </main>
     </div>

@@ -2,16 +2,41 @@
 
 @theme {
   --font-outfit: 'Outfit', sans-serif;
-  --animate-fade-in-down: fade-in-down 0.8s ease-out forwards;
+
+  --animate-fade-in-down: fade-in-down 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in-up: fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-scale-in: scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 
   @keyframes fade-in-down {
-    0% {
+    from {
       opacity: 0;
-      transform: translateY(-20px);
+      transform: translate3d(0, -24px, 0);
     }
-    100% {
+    to {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale3d(0.88, 0.88, 1);
+    }
+    to {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
     }
   }
 }
@@ -28,9 +53,71 @@
   }
 }
 
-/* GPU acceleration hints for smooth animations */
-.will-change-transform {
-  will-change: transform;
-  transform: translateZ(0);
+/* Promote animated elements to their own compositor layer */
+.animate-fade-in-down,
+.animate-fade-in-up,
+.animate-scale-in {
+  will-change: opacity, transform;
   backface-visibility: hidden;
+}
+
+/* Contain blob repaints so they don't affect the rest of the page */
+.blob {
+  contain: layout style;
+  will-change: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Link card hover — separate from entrance animation to avoid conflict */
+.link-card {
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.25s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  backface-visibility: hidden;
+}
+
+.link-card:hover {
+  transform: translateY(-3px) scale(1.01);
+}
+
+.link-card:active {
+  transform: translateY(0px) scale(0.98);
+  transition-duration: 0.1s;
+}
+
+/* Icon container smooth color transition */
+.link-icon {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.link-card:hover .link-icon {
+  transform: scale(1.15);
+}
+
+/* Arrow slide-in on hover */
+.link-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.link-card:hover .link-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Profile avatar ring pulse */
+.avatar-ring {
+  transition: box-shadow 0.3s ease;
+}
+
+.avatar-ring:hover {
+  box-shadow:
+    0 0 0 4px rgba(244, 114, 182, 0.25),
+    0 20px 40px rgba(244, 114, 182, 0.2);
 }
