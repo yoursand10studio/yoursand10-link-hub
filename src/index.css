@@ -61,7 +61,7 @@
   will-change: opacity, transform;
 }
 
-/* Isolate blobs to their own paint layer without triggering reflow */
+/* Isolate blobs without triggering reflow */
 .blob {
   isolation: isolate;
   transform: translateZ(0);

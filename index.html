@@ -37,8 +37,9 @@
     />
     <meta property="twitter:image" content="https://yoursand10.com/og-image.jpg" />
 
-    <!-- Preload critical above-the-fold image for faster LCP -->
-    <link rel="preload" as="image" href="/src/assets/image/Logo.webp" type="image/webp" />
+    <!-- Preconnect for fonts (high priority) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- DNS prefetch for social links -->
     <link rel="dns-prefetch" href="https://www.tiktok.com" />
@@ -46,21 +47,13 @@
     <link rel="dns-prefetch" href="https://x.com" />
     <link rel="dns-prefetch" href="https://line.me" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Preload critical font weights for faster LCP -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
-    />
+    <!-- Load fonts asynchronously to avoid render blocking -->
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
       media="print"
-      onload="this.media = 'all'"
+      onload="this.media='all'"
     />
-    <!-- Fallback for non-JS browsers -->
     <noscript>
       <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"

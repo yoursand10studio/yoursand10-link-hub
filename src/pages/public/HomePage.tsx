@@ -158,11 +158,25 @@ const HomePage: React.FC = () => {
   return (
     <div
       className="font-outfit relative min-h-screen overflow-hidden text-slate-800"
-      style={{ background: 'linear-gradient(135deg, #fdf2f8 0%, #faf5ff 40%, #fff7ed 100%)' }}
+      style={{
+        background: 'linear-gradient(135deg, #fdf2f8 0%, #faf5ff 40%, #fff7ed 100%)',
+      }}
     >
-      {/* Background blobs */}
-      <div className="blob absolute top-[-15%] left-[-8%] h-[55%] w-[55%] rounded-full bg-pink-300/20 blur-3xl" />
-      <div className="blob absolute right-[-8%] bottom-[-15%] h-[50%] w-[45%] rounded-full bg-violet-300/15 blur-3xl" />
+      {/* Background blobs (Using radial-gradient instead of expensive blur filter for better performance) */}
+      <div
+        className="blob absolute top-[-15%] left-[-8%] h-[55%] w-[55%] rounded-full"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(249, 168, 212, 0.4) 0%, rgba(249, 168, 212, 0) 70%)',
+        }}
+      />
+      <div
+        className="blob absolute right-[-8%] bottom-[-15%] h-[50%] w-[45%] rounded-full"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(196, 181, 253, 0.3) 0%, rgba(196, 181, 253, 0) 70%)',
+        }}
+      />
 
       <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-sm flex-col items-center px-5 py-10 supports-[min-height:100dvh]:min-h-dvh sm:max-w-md sm:px-6 sm:py-14">
         {/* Profile Section */}
@@ -175,10 +189,11 @@ const HomePage: React.FC = () => {
             <img
               src={logoImage}
               alt="Yours & 10 Logo"
+              width={112}
+              height={112}
               className="h-full w-full object-contain"
               loading="eager"
               fetchPriority="high"
-              decoding="sync"
             />
           </div>
 
